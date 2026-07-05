@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi Coincidencia Más Linda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Playfair Display', 'Georgia', serif;
+            background-color: #0d0d0d;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Fondo de la foto con efecto cinematográfico */
+        .background-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .background-image {
+            width: 100%;
+            height: 100%;
+            background-image: url('foto.jpg'); 
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.4) contrast(1.1);
+            transform: scale(1.05);
+            animation: subtleZoom 20s infinite alternate ease-in-out;
+        }
+
+        /* Capa de color suave rosa/negro sobre la foto */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 13, 13, 0.8) 0%, rgba(255, 192, 203, 0.15) 100%);
+            z-index: 2;
+        }
+
+        /* Contenido Principal */
+        .content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+        }
+
+        /* Animación elegante y corregida para el texto */
+        .romantic-text {
+            color: #ffffff;
+            font-size: 2.2rem;
+            line-height: 1.6;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-shadow: 0px 4px 20px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            filter: blur(8px);
+            animation: elegantFadeIn 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation-delay: 0.5s;
+        }
+
+        .romantic-text span {
+            color: #ffb6c1; /* Rosado suave */
+            font-weight: bold;
+        }
+
+        /* Botón de Música Flotante Premium */
+        .music-btn {
+            position: absolute;
+            bottom: 40px;
+            z-index: 4;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 192, 203, 0.3);
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .music-btn:hover {
+            background: rgba(255, 192, 203, 0.2);
+            border-color: #ffb6c1;
+            transform: translateY(-2px);
+        }
+
+        /* Animaciones */
+        @keyframes subtleZoom {
+            0% { transform: scale(1.02); }
+            100% { transform: scale(1.07); }
+        }
+
+        @keyframes elegantFadeIn {
+            0% {
+                opacity: 0;
+                filter: blur(8px);
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                transform: translateY(0);
+            }
+        }
+
+        /* Adaptación para pantallas móviles */
+        @media (max-width: 768px) {
+            .romantic-text {
+                font-size: 1.7rem;
+                line-height: 1.5;
+            }
+            .music-btn {
+                bottom: 50px;
+                font-size: 0.8rem;
+                padding: 10px 20px;
+            }
+        }
+    </style>
+    <!-- Fuente elegante de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="background-container">
+        <div class="background-image"></div>
+        <div class="overlay"></div>
+    </div>
+
+    <div class="content">
+        <p class="romantic-text">
+            "A mí más linda coincidencia, feliz cumple mes de nuestro <span>primero besito</span>, Te amo"
+        </p>
+    </div>
+
+    <!-- Música de fondo configurada con un archivo de audio compatible -->
+    <button class="music-btn" id="musicToggle">REPRODUCIR MÚSICA</button>
+    <audio id="romanticAudio" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        const audio = document.getElementById('romanticAudio');
+        const btn = document.getElementById('musicToggle');
+
+        btn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play().catch(e => console.log("La reproducción fue bloqueada o el archivo no es válido:", e));
+                btn.textContent = "PAUSAR MÚSICA";
+                btn.style.background = "rgba(255, 192, 203, 0.2)";
+            } else {
+                audio.pause();
+                btn.textContent = "REPRODUCIR MÚSICA";
+                btn.style.background = "rgba(255, 255, 255, 0.1)";
+            }
+        });
+    </script>
+</body>
+</html>
